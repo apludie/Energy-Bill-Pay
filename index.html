@@ -19,9 +19,49 @@ body{background:#080e19;color:var(--ink);background-image:radial-gradient(ellips
 .footer{background:#050a13;color:#d8e7f5;border-top:1px solid #1c3045}.footer h3{color:#f1f7ff}.footer .brandname{color:#f1f7ff}.footer .brandtag{color:#8ca6bd}.footer-copy,.footer-links,.footer-contact,.footer-bottom{color:#92a7bc}.footer-bottom{border-color:#20334a}.footer-links a:hover{color:#66e2e6}.disclaimer strong,.copyright{color:#e0eef9}
 @media(max-width:650px){.navlinks{background:#091321;border-color:#263a50}.navlinks a{color:#cad9e7}.hero-grid{background:transparent}.hero-art{min-height:285px}.orb{right:calc(50% - 135px)}.topbar{background:#050912}}
 </style>
+<style id="contact-popup-theme">
+.contact-modal-backdrop{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(2,7,15,.76);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease}
+.contact-modal-backdrop.is-open{opacity:1;visibility:visible}
+.contact-modal{position:relative;width:min(520px,100%);overflow:hidden;border:1px solid rgba(84,222,235,.24);border-radius:24px;background:linear-gradient(145deg,#101f32 0%,#0b1423 58%,#09111e 100%);box-shadow:0 30px 90px rgba(0,0,0,.58),0 0 55px rgba(38,190,220,.12);transform:translateY(14px) scale(.97);transition:transform .32s cubic-bezier(.2,.8,.2,1);color:#eef5ff}
+.contact-modal-backdrop.is-open .contact-modal{transform:translateY(0) scale(1)}
+.contact-modal:before{content:"";position:absolute;inset:-35% -20% auto auto;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(47,215,226,.18),transparent 68%);pointer-events:none}
+.contact-modal-close{position:absolute;right:15px;top:15px;width:38px;height:38px;border:1px solid #294057;border-radius:50%;background:rgba(9,20,34,.78);color:#a9bed0;display:grid;place-items:center;font-size:22px;line-height:1;cursor:pointer;transition:.2s ease;z-index:2}
+.contact-modal-close:hover{color:#fff;border-color:#4cdbe5;background:#13283c;transform:rotate(4deg)}
+.contact-modal-inner{position:relative;padding:36px 38px 34px;text-align:center}
+.contact-modal-icon{width:62px;height:62px;margin:0 auto 19px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(145deg,#38dfe1,#2877df);color:#06131e;box-shadow:0 0 32px rgba(51,211,228,.2);font-size:29px}
+.contact-modal-kicker{margin:0 0 8px;color:#65e3e9;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.contact-modal h2{margin:0;color:#f3f8ff;font-size:30px;line-height:1.2;letter-spacing:-.025em}
+.contact-modal-copy{max-width:410px;margin:13px auto 0;color:#9eb2c7;font-size:15px;line-height:1.65}
+.contact-modal-number{display:inline-block;margin:21px 0 7px;color:#fff;font-size:27px;font-weight:800;letter-spacing:.02em}
+.contact-modal-hours{display:block;color:#70dfe4;font-size:13px;font-weight:700}
+.contact-modal-call{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;margin-top:23px;padding:14px 20px;border-radius:13px;background:linear-gradient(100deg,#20bac2,#3977e8);color:#04131d;font-size:16px;font-weight:850;box-shadow:0 12px 28px rgba(36,181,216,.18);transition:transform .2s ease,box-shadow .2s ease}
+.contact-modal-call:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(36,181,216,.28)}
+.contact-modal-note{margin:13px 0 0;color:#70869d;font-size:12px}
+.contact-modal-note button{border:0;background:none;color:#8fa7bb;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:0;font:inherit}
+body.modal-open{overflow:hidden}
+@media(max-width:600px){.contact-modal-inner{padding:31px 23px 27px}.contact-modal h2{font-size:25px}.contact-modal-number{font-size:23px}.contact-modal{border-radius:20px}.contact-modal-close{right:11px;top:11px}}
+</style>
+
 </head>
 <body>
 <div id="app"></div>
+
+<div id="contactModal" class="contact-modal-backdrop" aria-hidden="true">
+  <div class="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+    <button class="contact-modal-close" type="button" aria-label="Close payment assistance popup">&times;</button>
+    <div class="contact-modal-inner">
+      <div class="contact-modal-icon" aria-hidden="true">☎</div>
+      <p class="contact-modal-kicker">ENERGY BILL PAY</p>
+      <h2 id="contactModalTitle">Need help paying your utility bill?</h2>
+      <p class="contact-modal-copy">For assistance with energy, electricity, gas, or utility bill payments, our customer support team is available to help.</p>
+      <a class="contact-modal-number" href="tel:+180072924557">1-800-PAY-BILLS</a>
+      <span class="contact-modal-hours">Available 24/7 for your energy billing needs</span>
+      <a class="contact-modal-call" href="tel:+180072924557"><span aria-hidden="true">☎</span> Call Now</a>
+      <p class="contact-modal-note">Prefer to browse? <button type="button" id="contactModalContinue">Continue to website</button></p>
+    </div>
+  </div>
+</div>
+
 <script>
 const providers=`PG&E|Duke Energy|Southern California Edison|Consumers Energy|Dominion Energy|FPL|DTE Energy|Xcel Energy|Ameren|Georgia Power|Entergy|AEP|FirstEnergy|National Grid|Con Edison|PSE&G|Baltimore Gas and Electric|CenterPoint Energy|NV Energy|Evergy|Ambit Energy|Reliant Energy|TXU Energy|Green Mountain Energy|Constellation Energy|Piedmont Gas|Atmos Energy|Nicor Gas|Peoples Gas|Southwest Gas|Columbia Gas|Washington Gas|Enbridge Gas|SoCalGas|SDG&E|Pacific Power|Avista|Tampa Electric (TECO)|Alabama Power|Gulf Power|Oklahoma Gas & Electric (OG&E)|PPL Electric|Alliant Energy|WE Energies|Dominion Energy Virginia|Dominion Energy SC|Dominion Energy Ohio|Dominion Energy NC|Dominion Power Virginia|Virginia Natural Gas|Kansas Gas Service|Spire|Spire Gas|Spire Alabama|Spire Gas Company|Enstar Alaska|Enstar Natural Gas|Black Hills Energy|Semco Energy|Semco Gas|NIPSCO|Indiana Michigan Power|Michigan Gas Utilities|Ohio Edison|Toledo Edison|West Penn Power|Mon Power|Penelec|New Mexico Gas Company|PNM Electric|PNM New Mexico|El Paso Electric|El Paso Gas Company|Texas Gas Service|Texas Gas Company|Entex Gas|Aspire Gas|Aspire Gas Company|Liberty Gas|Summit Utilities|Summit Gas|Florida City Gas|Florida Power & Light|Florida Power|Tampa Electric|TECO Energy|TECO Electric|TECO Gas|Progress Energy|Greystone Power|Greenville Utilities|Green Mountain Power|Flint Energies|EMC Gas|EMC Light Bill|Georgia Natural Gas|Atlanta Gas Light|Scana Energy|Gas South|True Natural Gas|California Gas Company|California Edison|California Gas|Anaheim Gas|The Gas Company|SoCal Gas Company|Southern California Gas Company|Southern California Gas|So Cal Gas|South Cal Gas|San Diego Gas and Electric|Nevada Power|Nevada Energy|Nevada Gas|Cascade Natural Gas|Intermountain Gas|Intermountain Gas Company|North Shore Gas|Madison Gas|MG&E|Ameren Missouri|Ameren Columbia MO|Ameren Illinois|Ameren UE|Ameren CILCO|Missouri Gas|Missouri Electric|Midamerican Energy|Mid American|Mid-American Energy|Alliant Energy|Louisiana Power|Appalachian Power|AEP Ohio|AEP Huntington|AEP Electric|American Electric Power|SCEG|SCE|Elizabethtown Gas|Mountaineer Gas|Peoples Natural Gas|Peoples Gas Chicago|Peoples Gas Company|Connecticut Natural Gas|Rhode Island Energy|RI Energy|PSEG Long Island|Columbia Gas of Ohio|Columbia Gas Ohio|Columbia Gas of Virginia|Columbia Gas of PA|Columbia Gas of Pennsylvania|Columbus Gas|Indiana Power|Michigan Power|Gexa Energy|Steam Energy|NEC Electric|Nightcore Gas|Pay Less Power|Best Utility Providers`.split('|');
 const faqs=[
@@ -93,5 +133,22 @@ function faqPage(){return `<main><section class="page-head"><div class="containe
 function legalPage(title,items){return `<main><section class="page-head"><div class="container"><h1>${title}</h1></div></section><section class="container"><article class="legal-card"><p class="updated">Last Updated: December 2024</p>${items.map(([head,content])=>`<section class="legal-section"><h2>${head}</h2>${Array.isArray(content)?`${content[0].startsWith('We collect')||content[0].startsWith('We use')||content[0].startsWith('We may share')||content[0].startsWith('Depending')||content[0].startsWith('When using')||content[0].startsWith('You agree')?`<p>${content[0]}</p>`:''}<ul>${content.slice(1).map(x=>`<li>${x}</li>`).join('')}</ul>${content[0].startsWith('If you ')||content[0].startsWith('To exercise')?`<p>${content[0]}</p>`:''}`:`<p>${content}</p>`}</section>`).join('')}</article></section></main>`}
 function render(){const route=location.hash.replace(/^#/, '')||'/';let page;if(route==='/faq')page=faqPage();else if(route==='/privacy')page=legalPage('Privacy Policy',privacy);else if(route==='/terms')page=legalPage('Terms and Conditions',terms);else page=homepage();document.getElementById('app').innerHTML=header()+page+footer();document.querySelectorAll('.navlinks [data-route]').forEach(a=>a.classList.toggle('active',a.dataset.route===route));document.querySelectorAll('.faq-question').forEach(btn=>btn.addEventListener('click',()=>{const item=btn.closest('.faq-item');item.classList.toggle('open');btn.setAttribute('aria-expanded',item.classList.contains('open'));}));const menu=document.querySelector('.mobile-menu'),links=document.querySelector('.navlinks');menu.addEventListener('click',()=>{const open=links.classList.toggle('show');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'×':'☰'});document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('show');menu.setAttribute('aria-expanded','false');menu.textContent='☰';}));window.scrollTo(0,0)}window.addEventListener('hashchange',render);render();
 </script>
+
+<script id="contact-popup-script">
+(function(){
+  const modal=document.getElementById('contactModal');
+  if(!modal) return;
+  const closeBtn=modal.querySelector('.contact-modal-close');
+  const continueBtn=document.getElementById('contactModalContinue');
+  function closeModal(){modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');}
+  function openModal(){modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.classList.add('modal-open');}
+  closeBtn.addEventListener('click',closeModal);
+  continueBtn.addEventListener('click',closeModal);
+  modal.addEventListener('click',e=>{if(e.target===modal) closeModal();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('is-open')) closeModal();});
+  window.setTimeout(openModal,700);
+})();
+</script>
+
 </body>
 </html>
