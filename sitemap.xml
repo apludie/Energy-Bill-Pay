@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-       <loc>https://energy-bill-pay.com/</loc>
-       <lastmod>2026-10-07T20:05:15+00:00</lastmod>
-       <priority>1.0000</priority>
+    <loc>https://energy-bill-pay.com/energy-bill-payment/</loc>
+  </url>
+  <url>
+    <loc>https://energy-bill-pay.com/electricity-bill-payment/</loc>
+  </url>
+  <url>
+    <loc>https://energy-bill-pay.com/gas-bill-payment/</loc>
+  </url>
+  <url>
+    <loc>https://energy-bill-pay.com/utility-bill-payment/</loc>
+  </url>
+  <url>
+    <loc>https://energy-bill-pay.com/faq/</loc>
+  </url>
+  <url>
+    <loc>https://energy-bill-pay.com/privacy-policy/</loc>
+  </url>
+  <url>
+    <loc>https://energy-bill-pay.com/terms/</loc>
+  </url>
+  <url>
+    <loc>https://energy-bill-pay.com/</loc>
   </url>
 </urlset>
